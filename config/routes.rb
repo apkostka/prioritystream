@@ -1,9 +1,7 @@
 Prioritystream::Application.routes.draw do
+	
+	resources :users
 
   root :to => 'home#index'
-
-  resources :tasks
-
-  resources :users
 
 end
