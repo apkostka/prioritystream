@@ -15,24 +15,8 @@
 #  updated_at  :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+require 'spec_helper'
 
-one:
-  name: MyString
-  description: MyText
-  job: MyString
-  estimate: 1
-  user_id: 1
-  worker_id: 1
-  created: 2013-06-19 16:54:20
-  priority: 1
-
-two:
-  name: MyString
-  description: MyText
-  job: MyString
-  estimate: 1
-  user_id: 1
-  worker_id: 1
-  created: 2013-06-19 16:54:20
-  priority: 1
+describe Task do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
