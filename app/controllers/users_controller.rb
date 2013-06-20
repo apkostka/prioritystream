@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(params[:user])
   	if @user.save
+      sign_in @user
   		flash[:success] = "New user created!"
   		redirect_to @user
   	else
@@ -23,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  	@user = User.find(params[:id])
+  	@user = User.find(params[:user])
   	if @user.destroy
   		flash[:success] = "User deleted!"
   		render 'home'

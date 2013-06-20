@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<header>
+	<%= link_to "Home", root_path %>
+	<% if signed_in? %>
+  	<%= link_to "Users", '/users' %>
+		<%= link_to "New User", '/users/new' %>
+		<%= link_to "Profile", current_user %>
+		<%= link_to "Sign out", signout_path, method: "delete" %>
+	<% else %>
+	  <%= link_to "Sign in", signin_path %>
+	<% end %>
+</header>
 	<% flash.each do |key, value| %>
   	<div class="alert alert-<%= key %>"><%= value %></div>
   <% end %>
