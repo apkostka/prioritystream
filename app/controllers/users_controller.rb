@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :signed_in_user, only: [:index, :show, :edit, :update]
   before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_user, only: [:new, :create]
 
 	def index
     @users = User.all
@@ -18,7 +19,6 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(params[:user])
   	if @user.save
-      sign_in @user
   		flash[:success] = "New user created!"
   		redirect_to @user
   	else
@@ -40,23 +40,29 @@ class UsersController < ApplicationController
   end
 
   def destroy
-  	@user = User.find(params[:user])
-  	if @user.destroy
-  		flash[:success] = "User deleted!"
-  		render 'home'
-  	end
+    if current_user == User.find(params[:id])
+      flash[:error] = "What the hell are you doing?"
+      redirect_to users_url
+    else
+    	User.find(params[:id]).destroy
+      flash[:success] = "User destroyed."
+      redirect_to users_url
+    end
   end
 
   private
     def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in." unless signed_in?
-      end
+      store_location
+      redirect_to signin_url, notice: "Please sign in." unless signed_in?
     end
 
     def correct_user
       @user = User.find(params[:id])
       redirect_to root_path, notice: "Who do you think you are? Shame on you." unless current_user?(@user)
     end
+
+    def admin_user
+      redirect_to root_path, notice: "You are not allowed to do that." unless current_user.admin?
+    end
+
 end

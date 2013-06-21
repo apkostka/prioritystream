@@ -3,4 +3,8 @@
 <% if current_user?(@user) %>
 <%= link_to "Edit Profile", edit_user_path(current_user) %>
 <% end %>
+<% if current_user.admin? %>
+<%= link_to "Delete", @user, method: :delete,
+														data: { confirm: "Are you sure?" } %>
+<% end %>
 <div style="height:20px;width:20px;display:inline-block;background-color:#<%= @user.color %>;"></div>
