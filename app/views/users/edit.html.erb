@@ -1,0 +1,26 @@
+<% provide(:title, 'Update your profile') %>
+<h1>Update your Profile</h1>
+
+	<%= form_for(@user) do |f| %>
+
+		<%= render 'shared/error_messages' %>
+
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		<br />
+		<%= f.label :email %>
+		<%= f.text_field :email %>
+		<br />
+		<%= f.label :color %>
+		<%= f.text_field :color %>
+		<br />
+		<h3>Please reconfirm or change your password to continue.</h3>
+		<%= f.label :password %>
+		<%= f.text_field :password %>
+		<br />
+		<%= f.label :password_confirmation, "Confirmation" %>
+		<%= f.text_field :password_confirmation %>
+		<br />
+		<%= f.submit "Edit user" %>
+
+	<% end %>
