@@ -27,3 +27,4 @@ production:
   password: kUNgmcT0nKXhnppU0SchBarZP-
   timeout: 5000
   host: ec2-54-225-121-179.compute-1.amazonaws.com
+  port: 5432
