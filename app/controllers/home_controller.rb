@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-  	@readme = File.read("/Library/WebServer/Documents/prioritystream/README.rdoc")
+  	@readme = File.read("/README.rdoc")
   end
 end
