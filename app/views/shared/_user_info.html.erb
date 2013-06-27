@@ -1,0 +1,7 @@
+<h4 style="display:inline-block;"><a href="<%= user_path(current_user) %>">
+  <%= current_user.name %>
+</a></h4>
+<span>
+  &nbsp;|&nbsp;&nbsp;<%= pluralize(current_user.tasks.count, "task") %>
+</span>
+<br />

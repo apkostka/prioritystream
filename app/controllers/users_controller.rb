@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_filter :signed_in_user, only: [:index, :show, :edit, :update]
+  before_filter :signed_in_user, only: [:index, :show, :edit, :update, :destroy]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user, only: [:new, :create]
+  before_filter :admin_user, only: [:new, :create, :destroy]
 
 	def index
     @users = User.all
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks
   end
 
   def new
@@ -51,10 +52,6 @@ class UsersController < ApplicationController
   end
 
   private
-    def signed_in_user
-      store_location
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
-    end
 
     def correct_user
       @user = User.find(params[:id])

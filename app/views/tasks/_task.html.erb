@@ -1,0 +1,13 @@
+<li>
+	<h4 style="display:inline-block;"><%= task.name %></h4>&nbsp;&nbsp;<%= link_to User.find(task.user_id).name, User.find(task.user_id) %>
+	<p class="description"><%= task.description %></p>
+	<span class="created">
+		Posted <%= time_ago_in_words(task.created_at) %> ago.
+	</span>
+	<% if current_user?(@user) %>
+&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit", edit_task_path(task) %>
+<% end %>
+<% if current_user.admin? || current_user?(@user) %>
+&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+<% end %>
+</li>

@@ -2,12 +2,15 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  color      :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  email           :string(255)
+#  color           :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string(255)
+#  remember_token  :string(255)
+#  admin           :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -15,12 +18,15 @@ class User < ActiveRecord::Base
   attr_accessible :color, :email, :name, :password, :password_confirmation
   has_secure_password
 
-  has_many :task
+  has_many :tasks
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token
 
   validates :name,  presence: true, length: { maximum: 50 }
+
+  validates :color, presence: true, :css_hex_color => true,
+                    uniqueness: { case_sensitive: false }
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },

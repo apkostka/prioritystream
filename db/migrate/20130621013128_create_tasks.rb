@@ -4,13 +4,15 @@ class CreateTasks < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :job
-      t.integer :estimate
+      t.integer :hours
+      t.datetime :due
+      t.boolean :complete
       t.integer :user_id
       t.integer :worker_id
-      t.timestamp :created
       t.integer :priority
 
       t.timestamps
     end
+    add_index :microposts, [:user_id, :created_at]
   end
 end

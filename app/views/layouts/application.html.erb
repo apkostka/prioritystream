@@ -15,8 +15,8 @@
 					<nav>
             <ul class="nav pull-right">
 							<% if signed_in? %>
+						  	<li><%= link_to "Tasks", '/tasks' %></li>
 						  	<li><%= link_to "Users", '/users' %></li>
-								<li><%= link_to "New User", '/users/new' %></li>
 								<li><%= link_to "Profile", current_user %></li>
 								<li><%= link_to "Sign out", signout_path, method: "delete" %></li>
 							<% else %>

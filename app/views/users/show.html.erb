@@ -1,10 +1,33 @@
-<%= @user.name %>, <%= @user.email %>
-
+<% provide(:title, @user.name) %>
+<div style="height:20px;width:20px;margin-right:5px;position:relative;top:4px;display:inline-block;background-color:<%= @user.color %>;"></div><%= @user.name %>, <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
 <% if current_user?(@user) %>
-<%= link_to "Edit Profile", edit_user_path(current_user) %>
+&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit Profile", edit_user_path(current_user) %>
 <% end %>
 <% if current_user.admin? %>
-<%= link_to "Delete", @user, method: :delete,
+&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", @user, method: :delete,
 														data: { confirm: "Are you sure?" } %>
 <% end %>
-<div style="height:20px;width:20px;display:inline-block;background-color:#<%= @user.color %>;"></div>
+	<% if @user.tasks.any? %>
+		<h3>Tasks (<%= @user.tasks.count %>)</h3>
+		<ol class="tasks">
+			<li>
+				<% @user.tasks.each do |task| %>
+					<h4 style="display:inline-block;"><%= task.name %></h4>
+					<% if current_user?(@user) %>
+						&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit", edit_task_path(task) %>
+					<% end %>
+					<% if current_user.admin? || current_user?(@user) %>
+						&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+					<% end %>
+					<br />
+					<span class="description"><%= task.description %></span>
+					<br />
+					<span class="created">
+						Posted <%= time_ago_in_words(task.created_at) %> ago.
+					</span>
+			</li>
+			<% end %>
+		</ol>
+	<% else %>
+		<h3>This user has no tasks associated.</h3>
+	<% end %>
