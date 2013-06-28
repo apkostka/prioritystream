@@ -6,4 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create! name: "Andrew", email: "akostka@gunnjerkens.com", color: "000000", admin: true
+User.create name: "Andrew", email: "akostka@gunnjerkens.com", color: "000000"
+User.last.update_attribute(:admin, true)
