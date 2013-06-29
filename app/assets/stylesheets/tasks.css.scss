@@ -9,8 +9,19 @@
   margin: 10px 0 0 0;
 
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding: 10px 20px;
+    cursor: hand;
+    cursor: pointer;
+    background: #eee;
+    margin: 5px 0;
+
+    &.sortable {
+      background: #fafafa;
+
+      &:active {
+        background: #ddd;
+      }
+    }
   }
 }
 .content {

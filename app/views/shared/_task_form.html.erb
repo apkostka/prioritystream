@@ -10,7 +10,7 @@
     <%= f.label :hours %>
     <%= f.text_field :hours, placeholder: :hours %>
     <%= f.label :due %>
-    <%= f.datetime_select :due %>
+    <%= f.text_field :due, class: "datepicker" %>
   </div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>

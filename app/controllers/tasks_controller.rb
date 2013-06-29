@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-	before_filter :signed_in_user, only: [:index, :create, :destroy]
+	before_filter :signed_in_user, only: [:index, :create, :update, :edit, :destroy, :priority]
   before_filter :correct_user,   only: :destroy
 
 	def index
@@ -13,6 +13,7 @@ class TasksController < ApplicationController
 
 	def create
     @task = current_user.tasks.build(params[:task])
+    @task.priority = Task.maximum("priority") + 1
     if @task.save
       flash[:success] = "Task created!"
       redirect_to '/tasks'
@@ -35,10 +36,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def update_all
+    params['task'].keys.each do |id|
+      @task = Task.find(id.to_i)
+      @task.update_attributes(params['task'][id])
+    end
+    redirect_to '/tasks'
+  end
+
 	def destroy
     @task.destroy
     flash[:success] = "Task Deleted"
-    redirect_to '/tasks'
+    redirect_to @tasks
 	end
 
   private

@@ -10,7 +10,7 @@
 	<% if @user.tasks.any? %>
 		<h3>Tasks (<%= @user.tasks.count %>)</h3>
 		<ol class="tasks">
-			<li>
+			<li class="sortable">
 				<% @user.tasks.each do |task| %>
 					<h4 style="display:inline-block;"><%= task.name %></h4>
 					<% if current_user?(@user) %>

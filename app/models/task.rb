@@ -28,4 +28,5 @@ class Task < ActiveRecord::Base
   validates :name, presence: true
 
   default_scope order: 'tasks.priority ASC'
+
 end

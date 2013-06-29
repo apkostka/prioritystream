@@ -11,10 +11,22 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
 
 jQuery(function($) {
 	$('.colorpicker').colorpicker();
+	$('.datepicker').datepicker();
+	$('ul.tasks.sortable').sortable({
+		stop: function(event, ui) {
+			$('ul.tasks.sortable li').each(function(index, value) {
+				var id = $(this).attr('data-id');
+				$('form.sortable input[name="task[' + id + '][priority]"]').val(index);
+				console.log(index);
+			})
+		},
+		cancel: "li:not(.sortable)"
+	});
 });
