@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-	before_filter :signed_in_user, only: [:index, :create, :update, :edit, :destroy, :priority]
-  before_filter :correct_user,   only: :destroy
+	before_filter :signed_in_user, only: [:index, :create, :update, :edit, :destroy]
+  before_filter :correct_user,   only: [:destroy, :edit, :update]
 
 	def index
 		@tasks = Task.all
