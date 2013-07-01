@@ -47,7 +47,7 @@ class TasksController < ApplicationController
 	def destroy
     @task.destroy
     flash[:success] = "Task Deleted"
-    redirect_to @tasks
+    redirect_to '/tasks'
 	end
 
   private
