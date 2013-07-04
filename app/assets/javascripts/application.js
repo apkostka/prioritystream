@@ -27,8 +27,9 @@ jQuery(function($) {
 				console.log(index);
 			});
 
-			
+			$('form.sortable').submit();
 		},
 		cancel: "li:not(.sortable)"
 	});
-});
+});//= require websocket_rails/main
+

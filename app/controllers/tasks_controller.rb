@@ -41,6 +41,7 @@ class TasksController < ApplicationController
       @task = Task.find(id.to_i)
       @task.update_attributes(params['task'][id])
     end
+    flash[:success] = "Profile Updated"
     redirect_to '/tasks'
   end
 
