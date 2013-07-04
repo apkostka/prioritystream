@@ -14,6 +14,13 @@
     cursor: pointer;
     background: #eee;
     margin: 5px 0;
+    position: relative;
+
+    h3 {
+      margin-top:0px;
+      position: relative;
+      top:4px;
+    }
 
     &.sortable {
       background: #fafafa;
@@ -21,6 +28,18 @@
       &:active {
         background: #ddd;
       }
+    }
+
+    p.description {
+      font-style: italic;
+      padding: 0px 20px;
+    }
+
+    .pull_right {
+      position: absolute;
+      right: 20px;
+      top:20px;
+      text-align: right;
     }
   }
 }

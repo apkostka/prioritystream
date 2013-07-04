@@ -1,13 +1,19 @@
 <li class="task<% if task.user_id == current_user.id || current_user.admin? %> sortable<% end %>" data-id="<%= task.id %>">
-	<h4 style="display:inline-block;"><%= task.name %></h4>&nbsp;&nbsp;<%= link_to User.find(task.user_id).name, User.find(task.user_id) %>
-	<p class="description"><%= task.description %></p>
-	<span class="created">
-		Last updated <%= time_ago_in_words(task.updated_at) %> ago.
-	</span>
+	<h3 style="display:inline-block;"><%= task.name %></h3>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="job">#<%= task.job %></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+		<% if task.due %>
+			Due on <%= task.due.strftime("%B %d, %Y") %>.
+		<% else %>
+			Due date is not set.
+		<% end %>
 	<% if current_user?(task.user_id) %>
 &nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit", edit_task_path(task) %>
 <% end %>
 <% if current_user.admin? || current_user?(@user) %>
-&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+&nbsp;&nbsp;|&nbsp;&nbsp;Est. <%= task.hours %> hours
 <% end %>
+	<p class="description"><%= task.description %></p>
+	<div class="pull_right">
+		Owned by <%= link_to User.find(task.user_id).name, User.find(task.user_id) %><br />
+		<%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>
+	</div>
 </li>
