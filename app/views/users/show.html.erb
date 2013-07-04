@@ -10,8 +10,9 @@
 	<% if @user.tasks.any? %>
 		<h3>Tasks (<%= @user.tasks.count %>)</h3>
 		<ol class="tasks">
-			<li class="sortable">
+			
 				<% @user.tasks.each do |task| %>
+				<li class="sortable">
 					<h4 style="display:inline-block;"><%= task.name %></h4>
 					<% if current_user?(@user) %>
 						&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit", edit_task_path(task) %>
