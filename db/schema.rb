@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621013128) do
+ActiveRecord::Schema.define(:version => 20130709011219) do
 
   create_table "tasks", :force => true do |t|
     t.string   "name"
@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(:version => 20130621013128) do
     t.string   "job"
     t.integer  "hours"
     t.datetime "due"
-    t.boolean  "complete"
+    t.boolean  "complete",    :default => false
     t.integer  "user_id"
     t.integer  "worker_id"
     t.integer  "priority"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "users", :force => true do |t|

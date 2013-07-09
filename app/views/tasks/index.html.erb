@@ -3,6 +3,10 @@
 <ul class="tasks sortable">
 <%= render @tasks %>
 </ul>
+<h3>Completed Tasks:</h3>
+<ul class="tasks complete">
+	<%= render @tasks_complete %>
+</ul>
 
 <%= form_for :task, :url => update_all_path, :remote => true, :html => { :method => :put, :class => "sortable" } do %>
 	<% @tasks.each do |task| %>

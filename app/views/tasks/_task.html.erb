@@ -1,4 +1,4 @@
-<li class="task<% if task.user_id == current_user.id || current_user.admin? %> sortable<% end %>" data-id="<%= task.id %>">
+<li class="task<% if task.user_id == current_user.id || current_user.admin? %> sortable<% end %><% if task.complete %> complete<% end %>" data-id="<%= task.id %>">
 	<div class="pull_left">
 		<h3 style="display:inline-block;"><%= task.name %></h3>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="job">#<%= task.job %></span>&nbsp;&nbsp;|&nbsp;&nbsp;
 		<% if task.due %>Due on <%= task.due.strftime("%B %d, %Y") %>.<% else %>Due date is not set.<% end %>
@@ -9,6 +9,9 @@
 		Owned by <%= link_to User.find(task.user_id).name, User.find(task.user_id) %><br />
 		<% if current_user.id == (task.user_id) || current_user.admin? %>
 			<%= link_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" } %>&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to "Edit", edit_task_path(task) %>
+			<%= form_for task, :url => '/tasks/'+task.id.to_s, :remote => true, :html => { :method => :put } do |f| %>
+				Complete? <%= f.check_box :complete %>
+			<% end %>
 		<% end %>
 	</div>
 </li>

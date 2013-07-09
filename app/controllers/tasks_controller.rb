@@ -3,7 +3,8 @@ class TasksController < ApplicationController
   before_filter :correct_user,   only: [:destroy, :edit, :update]
 
 	def index
-		@tasks = Task.all
+		@tasks = Task.where(:complete => false)
+    @tasks_complete = Task.where(:complete => true)
 		@user = current_user
 	end
 
@@ -24,6 +25,7 @@ class TasksController < ApplicationController
 
 	def edit
     @task = Task.find(params[:id])
+    @users = User.all
 	end
 
   def update

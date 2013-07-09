@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+//= require websocket_rails/main
 
 jQuery(function($) {
 	$('.colorpicker').colorpicker();
@@ -31,5 +32,10 @@ jQuery(function($) {
 		},
 		cancel: "li:not(.sortable)"
 	});
-});//= require websocket_rails/main
+
+	$('input#task_complete').change(function() {
+		$(this).parent('form').submit();
+		$(this).parents('li.task').fadeOut(300);
+	});
+});
 
