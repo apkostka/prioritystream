@@ -16,6 +16,15 @@
     margin: 5px 0;
     position: relative;
 
+    &.complete {
+      background: #ddd;
+      color: #999;
+
+      a {
+        color: #999;
+      }
+    }
+
     h3 {
       margin-top:0px;
       position: relative;

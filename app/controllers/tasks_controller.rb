@@ -25,7 +25,7 @@ class TasksController < ApplicationController
 
 	def edit
     @task = Task.find(params[:id])
-    @users = User.all
+    @users = User.all.map {|user| [user.name, user.id]}
 	end
 
   def update
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
 
     def correct_user
       @task = current_user.tasks.find_by_id(params[:id])
-      redirect_to root_url if @task.nil?
+      redirect_to root_url if @task.nil? && !current_user.admin?
     end
 
 end

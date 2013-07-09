@@ -35,7 +35,14 @@ jQuery(function($) {
 
 	$('input#task_complete').change(function() {
 		$(this).parent('form').submit();
-		$(this).parents('li.task').fadeOut(300);
+		//$(this).parents('li.task').fadeOut(300);
+		if ($(this).parents('li.task').hasClass('complete')) {
+			$('ul.tasks.sortable').append($(this).parents('li.task'));
+			$(this).parents('li.task').toggleClass('complete');
+		} else {
+			$('ul.complete').append($(this).parents('li.task'));
+			$(this).parents('li.task').toggleClass('complete');
+		}
 	});
 });
 
