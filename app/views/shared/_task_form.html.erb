@@ -5,7 +5,10 @@
   	<%= f.text_field :name, placeholder: :name %>
   	<%= f.label :description %>
     <%= f.text_area :description, placeholder: :description %>
-    <%= f.select :user_id, @users %>
+    <% if (current_user.admin?) %>
+      <%= f.label "Owner" %>
+      <%= f.select :user_id, @users %>
+    <% end %>
     <%= f.label :job %>
     <%= f.text_field :job, placeholder: :job %>
     <%= f.label :hours %>
